@@ -11,7 +11,7 @@ X2 = x2_dim.ravel()
 b = random.randint(0, 5)
 m1 = random.randint(0, 5)
 m2 = random.randint(0, 5)
-Y_real = 2 * X1 + 1.5 * X2 + 3 + np.random.randn(*X1.shape) * 0.3
+Y=2*X1 + 1.5*X2 + 3 + np.random.randn(*X1.shape) * 0.3
 
 display_step = 50
 N = len(X1)
@@ -33,7 +33,7 @@ for step in range(epochs):
 
     for i in range(N):
         Yp = (m1 * X1[i] + m2 * X2[i] + b)
-        Diferencia = Yp - Y_real[i]
+        Diferencia = Yp - Y[i]
         error += (Diferencia) ** 2
         m1_gradient += (2 / N) * (Diferencia) * X1[i]
         m2_gradient += (2 / N) * (Diferencia) * X2[i]
@@ -44,12 +44,13 @@ for step in range(epochs):
     m1 = m1 - (m1_gradient * learning_rate)
     m2 = m2 - (m2_gradient * learning_rate)
     b = b - (b_gradient * learning_rate)
+    Y_predict = m1 * X1 + m2 * X2 + b + np.random.randn(*X1.shape) * 0.3
 
     loss.append(np.abs(MSE))
     if step % display_step == 0:
         ax.clear()
-        ax.scatter(X1, X2, m1 * X1 + m2 * X2 + b + np.random.randn(*X1.shape) * 0.3, c='red',label='Maquina')
-        ax.scatter(X1, X2, 2 * X1 + 1.5 * X2 + 3, c='green', label='Original')
+        ax.scatter(X1, X2, Y_predict, c='red',label='Maquina')
+        ax.plot(X1, X2, Y, c='green', label='Original')
         ax.set_title("Datos artificiales")
         ax.set_xlabel('X1')
         ax.set_ylabel('X2')
@@ -70,7 +71,7 @@ for step in range(epochs):
 
         plt.tight_layout()  # Ajustar el espacio entre los gráficos
         plt.draw()
-        plt.pause(0.5)
+        plt.pause(0.1)
 
     if max(abs(learning_rate * m1_gradient), abs(learning_rate * b_gradient)) < convergence_criteria:
         break
