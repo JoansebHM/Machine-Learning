@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 x, y = np.meshgrid(np.arange( 0 , 5 , 0.1), np.arange( 0 , 3 , 0.1))
 X1 = x.ravel()
 X2 = y.ravel()
-Y=2*X1 + 1.5*X2 + 3 + np.random.randn(*X1.shape) * 0.3
+Y= 2*X1 + 1.5*X2 + 3 + np.random.randn(*X1.shape) * 0.3
 
 unos = np.ones_like(X1)
 X = np.column_stack((unos, X1, X2))
