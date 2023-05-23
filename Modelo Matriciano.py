@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import random
 
 x, y = np.meshgrid(np.arange( 0 , 5 , 0.1), np.arange( 0 , 3 , 0.1))
 X1 = x.ravel()
@@ -15,7 +14,6 @@ print(coeficientes)
 Y_predict = coeficientes[0] + coeficientes[1]*X1 + coeficientes[2]*X2
 
 fig = plt.figure()
-manager = plt.get_current_fig_manager().window.state('zoomed')
 ax = fig.add_subplot(1, 2, 1, projection='3d')
 ax.plot(X1, X2, Y,'green',label='Modelo original')
 ax.set_xlim(X1.min(), X1.max())  
