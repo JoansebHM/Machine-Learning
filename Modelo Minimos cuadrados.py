@@ -6,9 +6,13 @@ X1 = x.ravel()
 X2 = y.ravel()
 Y= 2*X1 + 1.5*X2 + 3 + np.random.randn(*X1.shape) * 0.3
 
-unos = np.ones_like(X1)
-X = np.column_stack((unos, X1, X2))
-coeficientes = np.linalg.inv(X.T @ X) @ (X.T @ Y)
+unos = np.ones_like(X1) # Creo columna de 1 del mismo numero de filas que X1
+X = np.column_stack((unos, X1, X2)) #Agrego la columna de 1
+MatrizTraspuesta = np.transpose(X) #Calcula la inversa
+Xt_X = np.dot(MatrizTraspuesta,X) #Multiplica las matrices
+Xt_X_inv = np.linalg.inv(Xt_X) #Inversa de Xtraspuesta y X
+Xt_Y = np.dot(MatrizTraspuesta,Y) #Multiplicacion de Xtraspuesta y los valores dependientes (Y)
+coeficientes = np.dot(Xt_X_inv,Xt_Y) #Muestro mis coeficientes b,m1,m2,mn...
 print(coeficientes)
 
 Y_predict = coeficientes[0] + coeficientes[1]*X1 + coeficientes[2]*X2
