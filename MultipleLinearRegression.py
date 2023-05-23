@@ -2,9 +2,7 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 
-x1_min, x1_max = 0, 5
-x2_min, x2_max = 0, 3
-x1_dim, x2_dim = np.meshgrid(np.arange(x1_min, x1_max, 0.1), np.arange(x2_min, x2_max, 0.1))
+x1_dim, x2_dim = np.meshgrid(np.arange(0, 5, 0.1), np.arange(0, 3, 0.1))
 X1 = x1_dim.ravel()
 X2 = x2_dim.ravel()
 
@@ -17,7 +15,6 @@ display_step = 50
 N = len(X1)
 loss = []
 fig = plt.figure()
-plt.get_current_fig_manager().window.state('zoomed')
 ax = fig.add_subplot(121, projection='3d') 
 ax2 = fig.add_subplot(122) 
 plt.ion()
